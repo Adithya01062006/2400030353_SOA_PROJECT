@@ -1,0 +1,52 @@
+# Maven / Java Build Artifacts
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Node / Frontend Artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.eslintcache
+frontend/.vite/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Eclipse IDE
+**/.settings/
+**/.project
+**/.classpath
+**/.factorypath
+**/.metadata/
+**/bin/
+
+# IntelliJ IDEA
+**/.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+**/.vscode/
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.swp
+
+# Logs and databases
+*.log
+*.sqlite
+subtrack.log
