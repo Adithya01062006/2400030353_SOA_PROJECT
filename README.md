@@ -1,34 +1,42 @@
-# SubTrack – Subscription Lifecycle & Recurring Revenue Management System
+# SubTrack – Full-Stack Subscription Lifecycle Management System [Backend Microservices & Frontend UI]
 
 > **Course**: 24SDCS03A - Service-Oriented Architecture (SOA [Adv])  
 > **Student ID**: 2400030353  
 > **Developer**: Adithya  
+> **Project Scope**: Full-Stack Architecture (Spring Cloud Backend Microservices + React Vite Frontend Client)  
 > **Architecture Pattern**: Service-Oriented Architecture (SOA) / Microservices Architecture  
-> **Tech Stack**: Java 21, Spring Boot 3.2.5, Spring Cloud 2023.0.1 (Eureka, Gateway, OpenFeign), JWT Security, MySQL 8.0, React 18, Vite  
+> **Backend Tech Stack**: Java 21, Spring Boot 3.2.5, Spring Cloud 2023.0.1 (Eureka, Spring Cloud Gateway, OpenFeign), JWT Security, MySQL 8.0, JUnit 5, Mockito  
+> **Frontend Tech Stack**: React 18, Vite, Tailwind CSS, Lucide Icons, Axios, Glassmorphic UI  
 
 ---
 
 ## 📌 Project Overview
 
-**SubTrack** is an enterprise-grade subscription lifecycle and recurring revenue management platform designed following **Service-Oriented Architecture (SOA)** and **Microservices** best practices.
+**SubTrack** is an enterprise-grade full-stack subscription lifecycle and recurring revenue management platform designed following **Service-Oriented Architecture (SOA)** and **Microservices** best practices.
 
-It handles recurring billing plans, user registration & JWT security, automated subscription renewals, payment simulation with unique transaction references, invoice generation, automated expiry schedulers, and real-time in-app notifications.
+It provides a decoupled **Backend Microservices Ecosystem** integrated with a modern **React Frontend Single-Page Application (SPA)**, handling:
+- Recurring billing plans & subscriptions catalog
+- User authentication & Role-Based Access Control (RBAC) with JWT & BCrypt
+- Automated subscription renewals & cancellations
+- Mock payment processing with transaction references (`TXN-`)
+- Automated invoice generation (`INV-`)
+- Scheduled expiry detection workers
+- Real-time in-app notification & alert dispatching
 
 ---
 
-## 🏗️ System Architecture & Separation
-
-The project is structured with a clean separation between **Backend Microservices** and the **Frontend Client Application**:
+## 🏗️ System Architecture: Frontend & Backend Separation
 
 ```text
                                   ┌────────────────────────────────┐
-                                  │       Frontend Application     │
-                                  │      React 18 + Vite (5173)    │
+                                  │      FRONTEND APPLICATION      │
+                                  │     React 18 + Vite (5173)     │
+                                  │  Glassmorphic Dashboard & UI   │
                                   └───────────────┬────────────────┘
-                                                  │ HTTP (Axios / JWT)
+                                                  │ HTTP / REST (Axios with Bearer Token)
                                                   ▼
                                   ┌────────────────────────────────┐
-                                  │      Spring Cloud Gateway      │
+                                  │      SPRING CLOUD GATEWAY      │
                                   │    Single Entry Point (8080)   │
                                   │  JWT Validation & RBAC Filters │
                                   └───────────────┬────────────────┘
@@ -64,16 +72,16 @@ The project is structured with a clean separation between **Backend Microservice
 
 ---
 
-## 📂 Repository Structure
+## 📂 Repository Structure (Frontend & Backend Clearly Separated)
 
 ```text
 2400030353_SOA_PROJECT/
 ├── .gitignore                      # Git ignore rules for Maven & Node.js
-├── README.md                       # Comprehensive Project Documentation
+├── README.md                       # Comprehensive Full-Stack Documentation
 ├── docker-compose.yml              # Container orchestration for all microservices
 ├── pom.xml                         # Root Maven parent POM multi-module aggregator
 │
-├── [BACKEND SERVICES]
+├── ⚙️ [BACKEND MICROSERVICES]
 │   ├── eureka-server/              # Netflix Eureka Service Discovery (Port: 8761)
 │   ├── api-gateway/                # Spring Cloud API Gateway with JWT & RBAC (Port: 8080)
 │   ├── user-service/               # Authentication, Users, BCrypt & JWT (Port: 8081)
@@ -81,7 +89,7 @@ The project is structured with a clean separation between **Backend Microservice
 │   ├── payment-service/            # Mock Payment Processing & Invoices (Port: 8083)
 │   └── notification-service/       # In-App Notifications & Expiry Alerts (Port: 8084)
 │
-├── [FRONTEND CLIENT]
+├── 🖥️ [FRONTEND APPLICATION]
 │   └── frontend/                   # Modern React 18 + Vite User & Admin Interface (Port: 5173)
 │       ├── src/
 │       │   ├── api/                # Axios instance with JWT Authorization interceptor
@@ -92,22 +100,34 @@ The project is structured with a clean separation between **Backend Microservice
 │       ├── package.json            # Node.js dependencies
 │       └── vite.config.js          # Vite configuration
 │
-└── docs/                           # Architecture diagrams, API specs, and test reports
+└── 📖 docs/                        # Architecture diagrams, API specs, and test reports
 ```
 
 ---
 
-## ⚙️ Microservices Matrix
+## ⚙️ Backend Microservices Matrix
 
-| Component | Port | Service ID | Database | Key Responsibilities |
+| Microservice | Port | Service ID | Database Schema | Key Responsibilities |
 | :--- | :---: | :--- | :--- | :--- |
-| **Eureka Server** | `8761` | `eureka-server` | — | Centralized service registry & heartbeat lookup |
-| **API Gateway** | `8080` | `api-gateway` | — | Single reverse-proxy entry point, CORS, JWT AuthFilter, RBAC |
-| **User Service** | `8081` | `USER-SERVICE` | `subtrack_user_db` | Registration, BCrypt password hashing, JWT token issue & validation |
+| **Eureka Server** | `8761` | `eureka-server` | — | Centralized service discovery, heartbeat registration & lookup |
+| **API Gateway** | `8080` | `api-gateway` | — | Single entry point, global CORS, JWT AuthenticationFilter, RBAC |
+| **User Service** | `8081` | `USER-SERVICE` | `subtrack_user_db` | Registration, BCrypt password hashing, JWT issue & `/validate` |
 | **Subscription Service** | `8082` | `SUBSCRIPTION-SERVICE` | `subtrack_subscription_db` | Plan management, lifecycle (`ACTIVE`, `EXPIRED`, `CANCELLED`), `@Scheduled` expiry |
 | **Payment Service** | `8083` | `PAYMENT-SERVICE` | `subtrack_payment_db` | Mock payment processing (`TXN-`), automated invoice generation (`INV-`) |
 | **Notification Service** | `8084` | `NOTIFICATION-SERVICE` | `subtrack_notification_db` | Automated expiry alerts, user notifications, Admin broadcasts via Feign |
-| **Frontend UI** | `5173` | `subtrack-frontend` | Client LocalStorage | Responsive, glassmorphic UI for Users & Admins with live dashboards |
+
+---
+
+## 🖥️ Frontend Web Application Features
+
+- **Built with**: React 18, Vite, Tailwind CSS, Lucide Icons
+- **Port**: `5173`
+- **Dashboard**: Real-time view of active subscriptions, total expenditure, and upcoming renewal alerts
+- **Interactive Plans**: One-click subscription activation with instant mock payment confirmation
+- **Invoices**: Searchable billing history with instant modal preview
+- **Notification Bell**: Live unread counter and notification center with mark-all-read
+- **Admin Console**: Dedicated panels to create/update plans and broadcast system alerts
+- **Authentication**: JWT auto-stored in LocalStorage with automatic Axios request interceptors
 
 ---
 
@@ -119,8 +139,8 @@ The project is structured with a clean separation between **Backend Microservice
 - **Node.js**: 18+ & npm (`node -v`, `npm -v`)
 - **MySQL**: 8.0 running on `localhost:3306`
 
-### Database Setup
-The services automatically create the databases if they do not exist:
+### MySQL Database Setup
+The backend services automatically create their required databases upon startup:
 ```sql
 CREATE DATABASE IF NOT EXISTS subtrack_user_db;
 CREATE DATABASE IF NOT EXISTS subtrack_subscription_db;
@@ -130,64 +150,65 @@ CREATE DATABASE IF NOT EXISTS subtrack_notification_db;
 
 ---
 
-## 🚀 How to Run the Project
+## 🚀 How to Run the Project (Backend & Frontend)
 
-### 1. Build All Microservices (Maven)
-From the project root:
+### 🅰️ Step 1: Build All Backend Microservices (Maven)
+From the root directory:
 ```bash
 mvn clean package -DskipTests
 ```
 
-### 2. Start Services in Order
+### 🅱️ Step 2: Start Backend Services in Order
 
-#### Step 1: Start Eureka Server
-```bash
-cd eureka-server
-java -jar target/subtrack-eureka-server-0.0.1-SNAPSHOT.jar
-# Access Dashboard at http://localhost:8761
-```
+1. **Eureka Server**:
+   ```bash
+   cd eureka-server
+   java -jar target/subtrack-eureka-server-0.0.1-SNAPSHOT.jar
+   # Accessible at http://localhost:8761
+   ```
 
-#### Step 2: Start User Service
-```bash
-cd user-service
-java -jar target/subtrack-user-service-0.0.1-SNAPSHOT.jar
-# Runs on port 8081
-```
+2. **User Service**:
+   ```bash
+   cd user-service
+   java -jar target/subtrack-user-service-0.0.1-SNAPSHOT.jar
+   # Runs on port 8081
+   ```
 
-#### Step 3: Start Payment Service
-```bash
-cd payment-service
-java -jar target/subtrack-payment-service-0.0.1-SNAPSHOT.jar
-# Runs on port 8083
-```
+3. **Payment Service**:
+   ```bash
+   cd payment-service
+   java -jar target/subtrack-payment-service-0.0.1-SNAPSHOT.jar
+   # Runs on port 8083
+   ```
 
-#### Step 4: Start Subscription Service
-```bash
-cd subscription-service
-java -jar target/subtrack-subscription-service-0.0.1-SNAPSHOT.jar
-# Runs on port 8082
-```
+4. **Subscription Service**:
+   ```bash
+   cd subscription-service
+   java -jar target/subtrack-subscription-service-0.0.1-SNAPSHOT.jar
+   # Runs on port 8082
+   ```
 
-#### Step 5: Start Notification Service
-```bash
-cd notification-service
-java -jar target/subtrack-notification-service-0.0.1-SNAPSHOT.jar
-# Runs on port 8084
-```
+5. **Notification Service**:
+   ```bash
+   cd notification-service
+   java -jar target/subtrack-notification-service-0.0.1-SNAPSHOT.jar
+   # Runs on port 8084
+   ```
 
-#### Step 6: Start API Gateway
-```bash
-cd api-gateway
-java -jar target/subtrack-api-gateway-0.0.1-SNAPSHOT.jar
-# Entry point on port 8080
-```
+6. **API Gateway**:
+   ```bash
+   cd api-gateway
+   java -jar target/subtrack-api-gateway-0.0.1-SNAPSHOT.jar
+   # Runs on port 8080 (Single Gateway Endpoint)
+   ```
 
-#### Step 7: Start Frontend Client
+### 🅲 Step 3: Start Frontend Client
+
 ```bash
 cd frontend
 npm install
 npm run dev
-# Access UI at http://localhost:5173
+# Open UI in browser at http://localhost:5173
 ```
 
 ---
@@ -201,9 +222,7 @@ npm run dev
 
 ---
 
-## 📡 Postman & REST API Documentation
-
-All API calls are routed through the **API Gateway** (`http://localhost:8080`).
+## 📡 Postman & REST API Documentation (Backend Gateway: `http://localhost:8080`)
 
 ### 1. Authentication (`/api/users`)
 - `POST /api/users/register` – Register new user
@@ -247,9 +266,9 @@ All API calls are routed through the **API Gateway** (`http://localhost:8080`).
 
 ---
 
-## 🧪 Automated Testing & Validation
+## 🧪 Automated Testing & Verification
 
-All microservices have complete positive and negative test coverage using JUnit 5, Mockito, and Spring MockMvc:
+Comprehensive test suites cover positive, negative, and edge cases across every service:
 
 ```bash
 mvn test
@@ -268,6 +287,6 @@ mvn test
 ## 👨‍💻 Author & Project Details
 
 - **Student ID**: 2400030353
-- **Name**: Adithya
+- **Developer**: Adithya
 - **GitHub Repository**: [https://github.com/Adithya01062006/2400030353_SOA_PROJECT](https://github.com/Adithya01062006/2400030353_SOA_PROJECT)
 - **Course**: 24SDCS03A - Service-Oriented Architecture (SOA [Adv])
