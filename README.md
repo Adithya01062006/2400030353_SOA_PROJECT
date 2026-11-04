@@ -81,7 +81,8 @@ It provides a decoupled **Backend Microservices Ecosystem** integrated with a mo
 ├── docker-compose.yml              # Container orchestration for all microservices
 ├── pom.xml                         # Root Maven parent POM multi-module aggregator
 │
-├── ⚙️ [BACKEND MICROSERVICES]
+├── ⚙️ backend/                     # BACKEND MICROSERVICES DIRECTORY
+│   ├── pom.xml                     # Backend multi-module aggregator POM
 │   ├── eureka-server/              # Netflix Eureka Service Discovery (Port: 8761)
 │   ├── api-gateway/                # Spring Cloud API Gateway with JWT & RBAC (Port: 8080)
 │   ├── user-service/               # Authentication, Users, BCrypt & JWT (Port: 8081)
@@ -89,16 +90,15 @@ It provides a decoupled **Backend Microservices Ecosystem** integrated with a mo
 │   ├── payment-service/            # Mock Payment Processing & Invoices (Port: 8083)
 │   └── notification-service/       # In-App Notifications & Expiry Alerts (Port: 8084)
 │
-├── 🖥️ [FRONTEND APPLICATION]
-│   └── frontend/                   # Modern React 18 + Vite User & Admin Interface (Port: 5173)
-│       ├── src/
-│       │   ├── api/                # Axios instance with JWT Authorization interceptor
-│       │   ├── components/         # Glassmorphic UI components, Modals, Navbar, Badges
-│       │   ├── context/            # Authentication & Theme Context Providers
-│       │   ├── pages/              # User Dashboard, Admin Dashboard, Plans, Subscriptions
-│       │   └── App.jsx             # Main Router & Application Root
-│       ├── package.json            # Node.js dependencies
-│       └── vite.config.js          # Vite configuration
+├── 🖥️ frontend/                    # FRONTEND WEB APPLICATION (React 18 + Vite)
+│   ├── src/
+│   │   ├── api/                    # Axios instance with JWT Authorization interceptor
+│   │   ├── components/             # Glassmorphic UI components, Modals, Navbar, Badges
+│   │   ├── context/                # Authentication & Theme Context Providers
+│   │   ├── pages/                  # User Dashboard, Admin Dashboard, Plans, Subscriptions
+│   │   └── App.jsx                 # Main Router & Application Root
+│   ├── package.json                # Node.js dependencies
+│   └── vite.config.js              # Vite configuration
 │
 └── 📖 docs/                        # Architecture diagrams, API specs, and test reports
 ```
@@ -162,42 +162,42 @@ mvn clean package -DskipTests
 
 1. **Eureka Server**:
    ```bash
-   cd eureka-server
+   cd backend/eureka-server
    java -jar target/subtrack-eureka-server-0.0.1-SNAPSHOT.jar
    # Accessible at http://localhost:8761
    ```
 
 2. **User Service**:
    ```bash
-   cd user-service
+   cd backend/user-service
    java -jar target/subtrack-user-service-0.0.1-SNAPSHOT.jar
    # Runs on port 8081
    ```
 
 3. **Payment Service**:
    ```bash
-   cd payment-service
+   cd backend/payment-service
    java -jar target/subtrack-payment-service-0.0.1-SNAPSHOT.jar
    # Runs on port 8083
    ```
 
 4. **Subscription Service**:
    ```bash
-   cd subscription-service
+   cd backend/subscription-service
    java -jar target/subtrack-subscription-service-0.0.1-SNAPSHOT.jar
    # Runs on port 8082
    ```
 
 5. **Notification Service**:
    ```bash
-   cd notification-service
+   cd backend/notification-service
    java -jar target/subtrack-notification-service-0.0.1-SNAPSHOT.jar
    # Runs on port 8084
    ```
 
 6. **API Gateway**:
    ```bash
-   cd api-gateway
+   cd backend/api-gateway
    java -jar target/subtrack-api-gateway-0.0.1-SNAPSHOT.jar
    # Runs on port 8080 (Single Gateway Endpoint)
    ```

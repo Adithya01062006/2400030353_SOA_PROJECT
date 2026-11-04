@@ -13,12 +13,7 @@
     <description>SubTrack – Subscription Lifecycle &amp; Recurring Revenue Management System</description>
 
     <modules>
-        <module>eureka-server</module>
-        <module>user-service</module>
-        <module>payment-service</module>
-        <module>subscription-service</module>
-        <module>notification-service</module>
-        <module>api-gateway</module>
+        <module>backend</module>
     </modules>
 
 </project>

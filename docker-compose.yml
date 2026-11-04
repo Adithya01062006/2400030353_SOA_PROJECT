@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   eureka-server:
-    build: ./eureka-server
+    build: ./backend/eureka-server
     container_name: subtrack-eureka-server
     ports:
       - "8761:8761"
@@ -10,7 +10,7 @@ services:
       - subtrack-network
 
   user-service:
-    build: ./user-service
+    build: ./backend/user-service
     container_name: subtrack-user-service
     ports:
       - "8081:8081"
@@ -22,7 +22,7 @@ services:
       - subtrack-network
 
   payment-service:
-    build: ./payment-service
+    build: ./backend/payment-service
     container_name: subtrack-payment-service
     ports:
       - "8083:8083"
@@ -34,7 +34,7 @@ services:
       - subtrack-network
 
   subscription-service:
-    build: ./subscription-service
+    build: ./backend/subscription-service
     container_name: subtrack-subscription-service
     ports:
       - "8082:8082"
@@ -47,7 +47,7 @@ services:
       - subtrack-network
 
   notification-service:
-    build: ./notification-service
+    build: ./backend/notification-service
     container_name: subtrack-notification-service
     ports:
       - "8084:8084"
@@ -61,7 +61,7 @@ services:
       - subtrack-network
 
   api-gateway:
-    build: ./api-gateway
+    build: ./backend/api-gateway
     container_name: subtrack-api-gateway
     ports:
       - "8080:8080"
