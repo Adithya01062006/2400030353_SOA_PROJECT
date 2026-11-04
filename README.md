@@ -3,6 +3,7 @@
 > **Course**: 24SDCS03A - Service-Oriented Architecture (SOA [Adv])  
 > **Student ID**: 2400030353  
 > **Developer**: Adithya  
+> **Live Web Application (GitHub Pages)**: [https://adithya01062006.github.io/2400030353_SOA_PROJECT/](https://adithya01062006.github.io/2400030353_SOA_PROJECT/)  
 > **Project Scope**: Full-Stack Architecture (Spring Cloud Backend Microservices + React Vite Frontend Client)  
 > **Architecture Pattern**: Service-Oriented Architecture (SOA) / Microservices Architecture  
 > **Backend Tech Stack**: Java 21, Spring Boot 3.2.5, Spring Cloud 2023.0.1 (Eureka, Spring Cloud Gateway, OpenFeign), JWT Security, MySQL 8.0, JUnit 5, Mockito  
